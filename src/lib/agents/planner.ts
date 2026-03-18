@@ -18,7 +18,7 @@ export async function createPlan(
     query: string,
     mode: AgentMode
 ): Promise<{ plan: Plan; followUpQuestion: string | null }> {
-    const context = getConversationContext(sessionId, 5);
+    const context = await getConversationContext(sessionId, 5);
     const prompt = getPlannerPrompt(mode, query, context);
 
     const model = process.env.OPENAI_MODEL || 'gpt-4o-mini';

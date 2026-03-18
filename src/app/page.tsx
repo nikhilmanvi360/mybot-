@@ -102,6 +102,9 @@ export default function Home() {
                                 if (parsed.content) {
                                     fullContent += parsed.content;
                                     setStreamingContent(fullContent);
+                                } else if (parsed.toolCall && parsed.toolCall.status === 'running') {
+                                    fullContent += `\n\n> 🛠️ **Using Tool:** \`${parsed.toolCall.name}\`...\n\n`;
+                                    setStreamingContent(fullContent);
                                 }
                             } catch {
                                 // Skip invalid JSON
@@ -206,6 +209,9 @@ export default function Home() {
                                 const parsed = JSON.parse(data);
                                 if (parsed.content) {
                                     fullContent += parsed.content;
+                                    setStreamingContent(fullContent);
+                                } else if (parsed.toolCall && parsed.toolCall.status === 'running') {
+                                    fullContent += `\n\n> 🛠️ **Using Tool:** \`${parsed.toolCall.name}\`...\n\n`;
                                     setStreamingContent(fullContent);
                                 }
                             } catch {

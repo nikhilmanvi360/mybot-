@@ -138,5 +138,17 @@ Step goal: ${stepDescription}
 ${previousResults ? `\nPrevious step results:\n${previousResults}` : ''}
 ${context ? `\nConversation context:\n${context}` : ''}
 
-Execute this step thoroughly. Provide detailed, actionable guidance. If you need more information from the user, ask specific questions.`;
+Execute this step thoroughly. Provide detailed, actionable guidance. 
+
+**CRITICAL: VISUAL WIDGETS**
+To provide a premium experience, you MUST use interactive widgets for data visualization. 
+Use these tags EXACTLY as shown:
+- [WIDGET: WEATHER : City Name]
+- [WIDGET: STOCK : Ticker Symbol]
+- [WIDGET: FLASHCARDS : [{"front": "Q", "back": "A"}]]
+- [WIDGET: FINANCE_CHART : {"title": "Title", "items": [{"label": "Name", "amount": 100}]}]
+
+**DO NOT** use markdown code blocks for flashcards or charts. Use the [WIDGET: ...] tags instead. If you have just called a tool, use its data to populate these tags.`;
+
+
 }

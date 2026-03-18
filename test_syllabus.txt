@@ -1,0 +1,5 @@
+Course Title: Advanced Astrobotany 301
+Instructor: Dr. Elara Vance
+Description: This course covers the cultivation of plant life in zero-gravity environments. We will focus on hydroponics in orbital stations and soil stabilization on Mars.
+Midterm Exam: Focuses on hydroponic nutrient mixing.
+Final Project: Designing a self-sustaining terrarium for a 5-year deep space mission.

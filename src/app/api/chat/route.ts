@@ -22,17 +22,17 @@ export async function POST(req: NextRequest) {
             );
         }
 
-        const session = getSession(sessionId, mode as AgentMode);
+        const session = await getSession(sessionId, mode as AgentMode);
 
         // Add user message to memory
-        addMessage(sessionId, { role: 'user', content: safety.sanitized! });
+        await addMessage(sessionId, { role: 'user', content: safety.sanitized! });
 
         // Check if this is a follow-up to an existing plan
-        const activePlan = getActivePlan(sessionId);
+        const activePlan = await getActivePlan(sessionId);
 
         if (action === 'next-step' && activePlan) {
             // Advance to next step
-            const result = advancePlanStep(sessionId);
+            const result = await advancePlanStep(sessionId);
             if (result.done) {
                 return NextResponse.json({
                     sessionId,
@@ -67,11 +67,11 @@ export async function POST(req: NextRequest) {
         if (needsPlan) {
             // Create a plan
             const { plan, followUpQuestion } = await createPlan(sessionId, safety.sanitized!, mode as AgentMode);
-            setActivePlan(sessionId, plan);
+            await setActivePlan(sessionId, plan);
 
             if (followUpQuestion) {
                 // Ask clarifying question first
-                addMessage(sessionId, { role: 'assistant', content: followUpQuestion, isFollowUp: true });
+                await addMessage(sessionId, { role: 'assistant', content: followUpQuestion, isFollowUp: true });
                 return NextResponse.json({
                     sessionId,
                     plan,
